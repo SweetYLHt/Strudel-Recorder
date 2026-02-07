@@ -26,6 +26,9 @@
     let recorderPanel = null;
     let recordButton = null;
     let statusText = null;
+    let titleElement = null;
+    let buttonsContainer = null;
+    let minimizeBtn = null;
 
     // Initialize the recorder
     function init() {
@@ -54,19 +57,21 @@
         `;
 
         // Create title
-        const title = document.createElement('div');
-        title.textContent = '🎵 Strudel Recorder';
-        title.style.cssText = `
+        titleElement = document.createElement('div');
+        titleElement.id = 'strudel-recorder-title';
+        titleElement.textContent = '🎵 Strudel Recorder';
+        titleElement.style.cssText = `
             color: white;
             font-weight: bold;
             margin-bottom: 10px;
             font-size: 14px;
             text-align: center;
         `;
-        recorderPanel.appendChild(title);
+        recorderPanel.appendChild(titleElement);
 
         // Create buttons container
-        const buttonsContainer = document.createElement('div');
+        buttonsContainer = document.createElement('div');
+        buttonsContainer.id = 'strudel-recorder-buttons';
         buttonsContainer.style.cssText = `
             display: flex;
             flex-direction: column;
@@ -140,7 +145,8 @@
         recorderPanel.appendChild(statusText);
 
         // Add minimize button
-        const minimizeBtn = document.createElement('button');
+        minimizeBtn = document.createElement('button');
+        minimizeBtn.id = 'strudel-recorder-minimize-btn';
         minimizeBtn.textContent = '−';
         minimizeBtn.style.cssText = `
             position: absolute;
@@ -168,22 +174,19 @@
     let isMinimized = false;
     function toggleMinimize() {
         isMinimized = !isMinimized;
-        const content = recorderPanel.querySelector('div:nth-child(2)');
-        const buttons = recorderPanel.querySelector('div:nth-child(2)').nextSibling;
-        const status = statusText;
 
         if (isMinimized) {
-            content.style.display = 'none';
-            buttons.style.display = 'none';
-            status.style.display = 'none';
+            titleElement.style.display = 'none';
+            buttonsContainer.style.display = 'none';
+            statusText.style.display = 'none';
             recorderPanel.style.minWidth = '50px';
-            recorderPanel.querySelector('button[style*="top: 5px"]').textContent = '+';
+            minimizeBtn.textContent = '+';
         } else {
-            content.style.display = 'block';
-            buttons.style.display = 'flex';
-            status.style.display = 'block';
+            titleElement.style.display = 'block';
+            buttonsContainer.style.display = 'flex';
+            statusText.style.display = 'block';
             recorderPanel.style.minWidth = '200px';
-            recorderPanel.querySelector('button[style*="top: 5px"]').textContent = '−';
+            minimizeBtn.textContent = '−';
         }
     }
 

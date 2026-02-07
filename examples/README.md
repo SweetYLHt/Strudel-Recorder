@@ -15,7 +15,7 @@ This directory contains example Strudel code patterns that you can use with the 
 ```javascript
 // Basic drum pattern
 sound("bd sd bd sd")
-  .bank("RRoland")
+  .bank("RolandTR909")
 ```
 
 ## Example 2: Melodic Pattern
